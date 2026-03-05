@@ -14,7 +14,7 @@ RSPS ist ein metadata-driven System mit bewusst kleiner, klarer Kernarchitektur.
 ## Lokales Setup
 
 ```bash
-git clone <your-fork-url>
+git clone https://github.com/ribershamoelias/rsps.git
 cd rsps
 go mod tidy
 go run ./cmd/rsps build ./example/app.rsps

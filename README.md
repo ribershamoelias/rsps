@@ -18,7 +18,7 @@ Das Ziel von V1 ist bewusst: **maximal einfach, modular, nachvollziehbar, Open-S
 ## Quickstart (30 Sekunden)
 
 ```bash
-git clone https://github.com/rse-labs/rsps
+git clone https://github.com/ribershamoelias/rsps.git
 cd rsps
 go run ./cmd/rsps run ./example/app.rsps
 ```
@@ -526,7 +526,7 @@ Diese Beispiele helfen dabei, verschiedene Domänenmodelle mit RSPS schnell zu v
 ### 1) Repository starten
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/ribershamoelias/rsps.git
 cd rsps
 ```
 
