@@ -1,5 +1,7 @@
 # RSPS — Radically Simpler Programming System (V1 / MVP)
 
+[![GitHub Repository](https://img.shields.io/badge/GitHub-ribershamoelias%2Frsps-181717?logo=github)](https://github.com/ribershamoelias/rsps.git)
+
 RSPS ist eine **metadata-driven Application Platform** in Go.  
 Ein Entwickler beschreibt seine Anwendung in **einer einzigen DSL-Datei** (`app.rsps`).
 
