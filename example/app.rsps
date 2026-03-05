@@ -1,0 +1,13 @@
+app todo {
+  project {
+    name string @unique
+    color string
+  }
+
+  task {
+    title string
+    done bool = false
+    due datetime?
+    project ref project
+  }
+}

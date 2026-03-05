@@ -1,0 +1,17 @@
+app issue_tracker {
+  project {
+    name string @unique
+    key string @unique
+    created_at datetime = now
+  }
+
+  issue {
+    project ref project
+    title string
+    description text?
+    status string = "open"
+    priority int = 3
+    assignee string?
+    created_at datetime = now
+  }
+}

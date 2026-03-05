@@ -1,0 +1,22 @@
+app blog {
+  user {
+    name string
+    email string @unique
+    created_at datetime = now
+  }
+
+  post {
+    title string
+    body text
+    published bool = false
+    author ref user
+    created_at datetime = now
+  }
+
+  comment {
+    post ref post
+    author ref user
+    content text
+    created_at datetime = now
+  }
+}

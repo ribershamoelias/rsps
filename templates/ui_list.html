@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.AppName}} - {{.Entity.Name}}</title>
+  <style>
+    body { font-family: sans-serif; margin: 24px; }
+    nav a { margin-right: 12px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 16px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    .actions { white-space: nowrap; }
+    .error { color: #a00; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>{{.AppName}} / {{.Entity.Name}}</h1>
+  <nav>
+    {{range .Entities}}
+      <a href="/ui/{{.Name}}">{{.Name}}</a>
+    {{end}}
+  </nav>
+
+  {{if .Error}}
+    <div class="error">{{.Error}}</div>
+  {{end}}
+
+  <p>
+    <a href="/ui/{{.Entity.Name}}/new">Create {{.Entity.Name}}</a>
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        {{range .Entity.Fields}}
+          <th>{{.Name}}</th>
+        {{end}}
+        <th>actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .Rows}}
+        {{$row := .}}
+        <tr>
+          <td>{{$row.ID}}</td>
+          {{range $field := $.Entity.Fields}}
+            <td>{{index $row.Values $field.Name}}</td>
+          {{end}}
+          <td class="actions">
+            <a href="/ui/{{$.Entity.Name}}/{{$row.ID}}/edit">edit</a>
+            <form action="/ui/{{$.Entity.Name}}/{{$row.ID}}/delete" method="post" style="display:inline;">
+              <button type="submit">delete</button>
+            </form>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="100">No records</td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+app inventory {
+  warehouse {
+    name string @unique
+    location string
+  }
+
+  product {
+    sku string @unique
+    name string
+    description text?
+    price float
+    active bool = true
+  }
+
+  stock_item {
+    warehouse ref warehouse
+    product ref product
+    quantity int = 0
+    updated_at datetime = now
+  }
+}

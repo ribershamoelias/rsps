@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.AppName}} - {{.Mode}} {{.Entity.Name}}</title>
+  <style>
+    body { font-family: sans-serif; margin: 24px; max-width: 720px; }
+    nav a { margin-right: 12px; }
+    label { display: block; margin: 10px 0 4px; }
+    input, textarea, select { width: 100%; padding: 8px; box-sizing: border-box; }
+    .checkbox { width: auto; }
+    .error { color: #a00; margin: 12px 0; }
+    .meta { color: #666; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <h1>{{.Mode}} {{.Entity.Name}}</h1>
+  <nav>
+    {{range .Entities}}
+      <a href="/ui/{{.Name}}">{{.Name}}</a>
+    {{end}}
+  </nav>
+
+  {{if .Error}}
+    <div class="error">{{.Error}}</div>
+  {{end}}
+
+  <form action="{{.Action}}" method="post">
+    {{range .Fields}}
+      <label for="{{.Name}}">{{.Label}}</label>
+      <div class="meta">type: {{.TypeLabel}}{{if .Nullable}} (nullable){{end}}</div>
+      {{if eq .Kind "textarea"}}
+        <textarea id="{{.Name}}" name="{{.Name}}" rows="4" {{if .Required}}required{{end}}>{{.Value}}</textarea>
+      {{else if eq .Kind "checkbox"}}
+        <input class="checkbox" id="{{.Name}}" name="{{.Name}}" type="checkbox" {{if .Checked}}checked{{end}}>
+      {{else if eq .Kind "select"}}
+        <select id="{{.Name}}" name="{{.Name}}" {{if .Required}}required{{end}}>
+          {{range .Options}}
+            <option value="{{.Value}}" {{if .Selected}}selected{{end}}>{{.Label}}</option>
+          {{end}}
+        </select>
+      {{else}}
+        <input id="{{.Name}}" name="{{.Name}}" type="{{.Kind}}" value="{{.Value}}" {{if .Required}}required{{end}}>
+      {{end}}
+    {{end}}
+    <p>
+      <button type="submit">Save</button>
+      <a href="/ui/{{.Entity.Name}}">Cancel</a>
+    </p>
+  </form>
+</body>
+</html>
